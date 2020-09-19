@@ -19,7 +19,7 @@ const user = require('./routes/user')
 //connect to mongoose
 const mongoose = require('mongoose')
 mongoose.connect(
-    "mongodb+srv://testuser:testuser@cluster0.7t5ar.mongodb.net/iprofile?retryWrites=true&w=majority",
+    "mongodb+srv://guestuser:guestuser@cluster0.gxqox.gcp.mongodb.net/fitogether?retryWrites=true&w=majority",
     { useNewUrlParser: true }
 )
 

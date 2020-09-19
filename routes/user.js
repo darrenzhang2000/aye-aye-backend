@@ -77,16 +77,20 @@ async function passMatch(user, password) {
 router.get("/login", (req, res) => {
   const { email, password } = req.query
   console.log('body', email, password)
+  User.findOne({email: email}, (err, u)=>console.log('q',u))
   //find user with given email in the database
   User.findOne({ email: email }, async (err, user) => {
     //no user in database has specified email
+    console.log('email found', user)
     if (!user) {
       res.send({success: false, message: "User does not exist"})
     } else {
+      console.log('user found')
       //email exists but incorrect password
       let match = await passMatch(user, password)
       if (!match) {
         console.log("email exists but incorrect password")
+        console.log('pass does not match')
         res.send({success: false, message: "Email exists but incorrect password"})
       } else {
         //email and passwords match
