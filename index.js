@@ -32,6 +32,6 @@ app.get('/', (req, res) => {
     res.send("hello")
 })
 
-// app.use('/user', user)
+app.use('/user', user)
 
 app.listen(port, () => console.log("listening at port", port))
