@@ -83,6 +83,7 @@ router.get("/login", (req, res) => {
     //no user in database has specified email
     console.log('email found', user)
     if (!user) {
+      console.log('user does not exits')
       res.send({success: false, message: "User does not exist"})
     } else {
       console.log('user found')
@@ -104,17 +105,13 @@ router.get("/login", (req, res) => {
 // create user profile
 // http://localhost:5000/user/email/:email/profile
 router.post('/email/:email/profile', (req, res) => {
-  const { lastName, firstName, dateOfBirth, university,
-    graduation, imageUrl, degree, major, profileAvaliableToRecruiter,
-    recieveMessageFromRecruiters } = req.body
+  var { name, dateOfBirth, gender, country, goal, shareWithNetwork} = req.body
 
   const { email } = req.params
   console.log('user prof email', req.params, email)
   //create new profile
   const userProfile = new Profile({
-    email, lastName, firstName, dateOfBirth, university,
-    graduation, imageUrl, degree, major, profileAvaliableToRecruiter,
-    recieveMessageFromRecruiters
+    email, name, dateOfBirth, gender, country, goal, shareWithNetwork
   })
   console.log('new prof', userProfile)
 

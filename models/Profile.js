@@ -2,24 +2,12 @@ var mongoose = require("mongoose")
 
 const profileSchema = new mongoose.Schema({
   email: String,
-  firstName: String,
-  lastName: String,
+  name: String,
   dateOfBirth: Date,
-  university: String,
-  graduation: Date,
-  imageUrl: String,
-  degree: String,
-  major: String,
-  profileAvaliableToRecruiter: {
-      type: Boolean,
-      default: false
-  },
-  recieveMessageFromRecruiters: {
-      type: Boolean,
-      default: false
-  }
-
-
+  gender: String,
+  country: String,
+  goal: String,
+  shareWithNetWork: Boolean
 })
 
 module.exports = mongoose.model("Profile", profileSchema)
