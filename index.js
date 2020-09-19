@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const port = process.env.PORT || 5000
+var socket = require('socket.io')
 
 //allow cors
 var cors = require('cors')
@@ -34,4 +35,32 @@ app.get('/', (req, res) => {
 
 app.use('/user', user)
 
-app.listen(port, () => console.log("listening at port", port))
+let server = app.listen(port, () => console.log("listening at port", port))
+
+
+// chat
+const getApiAndEmit = socket => {
+    const response = new Date();
+    // Emitting a new message. Will be consumed by the client
+    socket.emit("FromAPI", response);
+};
+
+const io = socket(server)
+io.on('connection', (socket) => {
+    console.log('socket connected', socket.id)
+
+    // interval = setInterval(() => {
+    //     getApiAndEmit(socket),
+    //     1000
+    // });
+
+    socket.on('chat', (data) => {
+        console.log('prickly pear')
+        io.sockets.emit('chat', data)
+    })
+
+    socket.on('typing', (data) => {
+        console.log('Quince')
+        socket.broadcast.emit('typing', data)
+    })
+})
